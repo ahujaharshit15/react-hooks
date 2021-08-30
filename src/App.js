@@ -1,30 +1,21 @@
-import React, { useEffect, useState } from "react";
-
+import React, { createContext } from "react";
 import "./App.css";
+import ComponentA from "./ComponentA";
 
-function App() {
-  const [num, setNum] = useState(0);
-  const [num2, setNum2] = useState(0);
+const FirstName = createContext();
+const LastName = createContext();
 
-  useEffect(() => {
-    alert("The value has been changed to " + num);
-  }, [num]);
-
-  const onClickButton = () => {
-    setNum(num + 1);
-  };
-
-  const onClickButton2 = () => {
-    setNum2(num2 + 1);
-  };
-
+const App = () => {
   return (
-    <div>
-      <button onClick={onClickButton}>Click Me {num}</button>
-      <br></br>
-      <button onClick={onClickButton2}>Click Me {num2}</button>
-    </div>
+    <React.Fragment>
+      <FirstName.Provider value={"Harshit"}>
+        <LastName.Provider value={"Ahuja"}>
+          <ComponentA />
+        </LastName.Provider>
+      </FirstName.Provider>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
+export { FirstName, LastName };
