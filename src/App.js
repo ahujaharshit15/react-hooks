@@ -1,24 +1,28 @@
-
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./App.css";
 
 function App() {
-  const [state, setState] = useState(true);
+  const [num, setNum] = useState(0);
+  const [num2, setNum2] = useState(0);
 
-  const changeFunction = () => {
-    setState(!state);
+  useEffect(() => {
+    alert("The value has been changed to " + num);
+  }, [num]);
+
+  const onClickButton = () => {
+    setNum(num + 1);
+  };
+
+  const onClickButton2 = () => {
+    setNum2(num2 + 1);
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>{state ? "Harshit Ahuja" : "Tihsrah Ajuha"}</p>
-        <button className="btn" onClick={changeFunction}>
-          Click me
-        </button>
-      </header>
+    <div>
+      <button onClick={onClickButton}>Click Me {num}</button>
+      <br></br>
+      <button onClick={onClickButton2}>Click Me {num2}</button>
     </div>
   );
 }
