@@ -1,3 +1,5 @@
+// used with createContext()
+
 import React from "react";
 import { FirstName, LastName } from "./App";
 
