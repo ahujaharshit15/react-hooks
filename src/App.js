@@ -1,23 +1,42 @@
-// ComponentB uses useContext Hook and ComponentC uses createContext() API to pass data without Props in order to use context.
-
-import React, { createContext } from "react";
+import React, { useReducer } from "react";
 import "./App.css";
-import ComponentA from "./ComponentA";
 
-const FirstName = createContext();
-const LastName = createContext();
+const initialState = 0;
+
+const reducer = (state, action) => {
+  console.log(state, action);
+  if (action.type === "Increase") {
+    return state + 1;
+  }
+  if (action.type === "Decrease") {
+    return state - 1;
+  }
+  return state;
+};
 
 const App = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
     <React.Fragment>
-      <FirstName.Provider value={"Harshit"}>
-        <LastName.Provider value={"Ahuja"}>
-          <ComponentA />
-        </LastName.Provider>
-      </FirstName.Provider>
+      <h1>{state}</h1>
+      <button
+        onClick={() => {
+          dispatch({ type: "Increase" });
+        }}
+      >
+        Increase
+      </button>
+      <br />
+      <button
+        onClick={() => {
+          dispatch({ type: "Decrease" });
+        }}
+      >
+        Decrease
+      </button>
     </React.Fragment>
   );
 };
 
 export default App;
-export { FirstName, LastName };
